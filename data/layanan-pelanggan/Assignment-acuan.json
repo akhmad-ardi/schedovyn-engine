@@ -1,0 +1,14 @@
+[
+  {"occurrence_id": "O01","date": "2026-09-21","start": "08:00","end": "12:00","resources": {"lead": [{"resource_id": "S1","units": 1}],"agents": [{"resource_id": "S4","units": 1},{"resource_id": "S5","units": 1}],"workstations": [{"resource_id": "DESK","units": 3}]}},
+  {"occurrence_id": "O02","date": "2026-09-21","start": "09:00","end": "12:00","resources": {"lead": [{"resource_id": "S2","units": 1}],"agents": [{"resource_id": "S3","units": 1}],"workstations": [{"resource_id": "DESK","units": 2}]}},
+  {"occurrence_id": "O03","date": "2026-09-21","start": "13:00","end": "16:00","resources": {"lead": [{"resource_id": "S2","units": 1}],"agents": [{"resource_id": "S4","units": 1},{"resource_id": "S6","units": 1}],"workstations": [{"resource_id": "DESK","units": 3}]}},
+  {"occurrence_id": "O04","date": "2026-09-21","start": "08:00","end": "09:00","resources": {"agents": [{"resource_id": "S6","units": 1}],"workstations": [{"resource_id": "DESK","units": 1}]}},
+  {"occurrence_id": "O05","date": "2026-09-22","start": "08:00","end": "12:00","resources": {"lead": [{"resource_id": "S1","units": 1}],"agents": [{"resource_id": "S4","units": 1},{"resource_id": "S5","units": 1}],"workstations": [{"resource_id": "DESK","units": 3}]}},
+  {"occurrence_id": "O06","date": "2026-09-22","start": "09:00","end": "12:00","resources": {"lead": [{"resource_id": "S2","units": 1}],"agents": [{"resource_id": "S6","units": 1}],"workstations": [{"resource_id": "DESK","units": 2}]}},
+  {"occurrence_id": "O07","date": "2026-09-22","start": "13:00","end": "16:00","resources": {"lead": [{"resource_id": "S2","units": 1}],"agents": [{"resource_id": "S3","units": 1},{"resource_id": "S5","units": 1}],"workstations": [{"resource_id": "DESK","units": 3}]}},
+  {"occurrence_id": "O08","date": "2026-09-22","start": "15:00","end": "16:00","resources": {"agents": [{"resource_id": "S4","units": 1}],"workstations": [{"resource_id": "DESK","units": 1}]}},
+  {"occurrence_id": "O09","date": "2026-09-23","start": "08:00","end": "12:00","resources": {"lead": [{"resource_id": "S1","units": 1}],"agents": [{"resource_id": "S4","units": 1},{"resource_id": "S5","units": 1}],"workstations": [{"resource_id": "DESK","units": 3}]}},
+  {"occurrence_id": "O10","date": "2026-09-23","start": "09:00","end": "12:00","resources": {"lead": [{"resource_id": "S2","units": 1}],"agents": [{"resource_id": "S3","units": 1}],"workstations": [{"resource_id": "DESK","units": 2}]}},
+  {"occurrence_id": "O11","date": "2026-09-23","start": "13:00","end": "16:00","resources": {"lead": [{"resource_id": "S1","units": 1}],"agents": [{"resource_id": "S4","units": 1},{"resource_id": "S6","units": 1}],"workstations": [{"resource_id": "DESK","units": 3}]}},
+  {"occurrence_id": "O12","date": "2026-09-23","start": "13:00","end": "14:00","resources": {"agents": [{"resource_id": "S5","units": 1}],"workstations": [{"resource_id": "DESK","units": 1}]}}
+]

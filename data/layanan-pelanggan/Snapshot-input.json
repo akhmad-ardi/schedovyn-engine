@@ -1,0 +1,59 @@
+{
+  "schema_version": "pilot-support-shifts-1.0.0",
+  "dataset_id": "SUPPORT-BASE-01",
+  "input_revision": 1,
+  "workspace": {"id": "WS-SUPPORT","name": "Pusat Layanan Contoh","timezone": "Asia/Makassar"},
+  "period": {"start_date": "2026-09-21","end_date": "2026-09-23","slot_minutes": 30},
+  "calendar": {"iso_weekdays": [1,2,3,4,5],"open_windows": [["08:00","12:00"],["13:00","16:00"]],"holidays": []},
+  "availability_profiles": [
+    {"id": "WORKDAYS","iso_weekdays": [1,2,3,4,5],"windows": [["08:00","12:00"],["13:00","16:00"]]}
+  ],
+  "resources": [
+    {"id": "S1","name": "Alya","type": "employee","tags": ["id","en","senior"],"concurrent_capacity": 1,"max_daily_minutes": 420,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "S2","name": "Bagas","type": "employee","tags": ["id","en","senior"],"concurrent_capacity": 1,"max_daily_minutes": 420,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "S3","name": "Citra","type": "employee","tags": ["id","en"],"concurrent_capacity": 1,"max_daily_minutes": 420,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "S4","name": "Damar","type": "employee","tags": ["id"],"concurrent_capacity": 1,"max_daily_minutes": 420,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "S5","name": "Eka","type": "employee","tags": ["id"],"concurrent_capacity": 1,"max_daily_minutes": 420,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "S6","name": "Farah","type": "employee","tags": ["id","en"],"concurrent_capacity": 1,"max_daily_minutes": 420,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "DESK","name": "Pool Workstation","type": "workstation_pool","tags": ["support_terminal"],"concurrent_capacity": 5,"active": true,"availability_profile_id": "WORKDAYS"}
+  ],
+  "availability_overrides": [
+    {"resource_id": "S1","date": "2026-09-22","available_windows": [["08:00","12:00"]],"reason": "Tidak tersedia sore"},
+    {"resource_id": "S6","date": "2026-09-23","available_windows": [["13:00","16:00"]],"reason": "Tidak tersedia pagi"}
+  ],
+  "activities": [
+    {"id": "A01","name": "Layanan Domestik Pagi","active": true,"duration_minutes": 240,"allowed_windows": [["08:00","12:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [1,2,3],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "lead","type": "employee","required_tags": ["senior","id"],"candidate_ids": ["S1","S2"],"select_count": 1,"units_per_selected_resource": 1},{"role": "agents","type": "employee","required_tags": ["id"],"candidate_ids": ["S1","S2","S3","S4","S5","S6"],"select_count": 2,"units_per_selected_resource": 1},{"role": "workstations","type": "workstation_pool","required_tags": ["support_terminal"],"fixed_resource_id": "DESK","select_count": 1,"units_per_selected_resource": 3}],"distinct_resource_roles": [["lead","agents"]]},
+    {"id": "A02","name": "Layanan Bahasa Inggris","active": true,"duration_minutes": 180,"allowed_windows": [["09:00","12:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [1,2,3],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "lead","type": "employee","required_tags": ["senior","en"],"candidate_ids": ["S1","S2"],"select_count": 1,"units_per_selected_resource": 1},{"role": "agents","type": "employee","required_tags": ["en"],"candidate_ids": ["S1","S2","S3","S6"],"select_count": 1,"units_per_selected_resource": 1},{"role": "workstations","type": "workstation_pool","required_tags": ["support_terminal"],"fixed_resource_id": "DESK","select_count": 1,"units_per_selected_resource": 2}],"distinct_resource_roles": [["lead","agents"]]},
+    {"id": "A03","name": "Layanan Domestik Sore","active": true,"duration_minutes": 180,"allowed_windows": [["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [1,2,3],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "lead","type": "employee","required_tags": ["senior","id"],"candidate_ids": ["S1","S2"],"select_count": 1,"units_per_selected_resource": 1},{"role": "agents","type": "employee","required_tags": ["id"],"candidate_ids": ["S1","S2","S3","S4","S5","S6"],"select_count": 2,"units_per_selected_resource": 1},{"role": "workstations","type": "workstation_pool","required_tags": ["support_terminal"],"fixed_resource_id": "DESK","select_count": 1,"units_per_selected_resource": 3}],"distinct_resource_roles": [["lead","agents"]]},
+    {"id": "A04","name": "Callback Pelanggan","active": true,"duration_minutes": 60,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [1,2,3],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "agents","type": "employee","required_tags": ["id"],"candidate_ids": ["S1","S2","S3","S4","S5","S6"],"select_count": 1,"units_per_selected_resource": 1},{"role": "workstations","type": "workstation_pool","required_tags": ["support_terminal"],"fixed_resource_id": "DESK","select_count": 1,"units_per_selected_resource": 1}],"distinct_resource_roles": []}
+  ],
+  "occurrences": [
+    {"id": "O01","activity_id": "A01","date": "2026-09-21","required": true},
+    {"id": "O02","activity_id": "A02","date": "2026-09-21","required": true},
+    {"id": "O03","activity_id": "A03","date": "2026-09-21","required": true},
+    {"id": "O04","activity_id": "A04","date": "2026-09-21","required": true},
+    {"id": "O05","activity_id": "A01","date": "2026-09-22","required": true},
+    {"id": "O06","activity_id": "A02","date": "2026-09-22","required": true},
+    {"id": "O07","activity_id": "A03","date": "2026-09-22","required": true},
+    {"id": "O08","activity_id": "A04","date": "2026-09-22","required": true},
+    {"id": "O09","activity_id": "A01","date": "2026-09-23","required": true},
+    {"id": "O10","activity_id": "A02","date": "2026-09-23","required": true},
+    {"id": "O11","activity_id": "A03","date": "2026-09-23","required": true},
+    {"id": "O12","activity_id": "A04","date": "2026-09-23","required": true}
+  ],
+  "enabled_hard_rules": ["H01","H02","H03","H04","H05","H06","H07","H08","H09","H10"],
+  "locks": [
+    {"occurrence_id": "O01","date": "2026-09-21","start": "08:00","end": "12:00","resources": {"lead": [{"resource_id": "S1","units": 1}],"agents": [{"resource_id": "S4","units": 1},{"resource_id": "S5","units": 1}],"workstations": [{"resource_id": "DESK","units": 3}]}}
+  ],
+  "published_bookings": [
+    {"id": "B01","workspace_id": "WS-SUPPORT","schedule_version_id": "EXT-DESK-V1","date": "2026-09-22","start": "13:00","end": "15:00","resource_units": {"DESK": 2},"label": "Workstation digunakan tim lain"}
+  ],
+  "replaces_schedule_version_id": null,
+  "preferences": [
+    {"id": "P01","type": "preferred_time","activity_ids": ["A04"],"weight": 5,"window": ["08:00","12:00"],"match": "full_interval","active": true},
+    {"id": "P02","type": "preferred_resource","activity_ids": ["A01","A03"],"weight": 3,"role": "lead","resource_ids": ["S1"],"match": "any_selected","active": true},
+    {"id": "P03","type": "preferred_resource","activity_ids": ["A02"],"weight": 3,"role": "agents","resource_ids": ["S3"],"match": "any_selected","active": true},
+    {"id": "P04","type": "preferred_resource","activity_ids": ["A03"],"weight": 1,"role": "agents","resource_ids": ["S6"],"match": "any_selected","active": true}
+  ],
+  "solver_budget_seconds": 60
+}

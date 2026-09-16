@@ -1,0 +1,67 @@
+{
+  "schema_version": "pilot-workshop-1.0.0",
+  "dataset_id": "WORKSHOP-BASE-01",
+  "input_revision": 1,
+  "workspace": {"id": "WS-WORKSHOP","name": "Bengkel Armada Contoh","timezone": "Asia/Makassar"},
+  "period": {"start_date": "2026-09-21","end_date": "2026-09-23","slot_minutes": 30},
+  "calendar": {"iso_weekdays": [1,2,3,4,5],"open_windows": [["08:00","12:00"],["13:00","16:00"]],"holidays": []},
+  "availability_profiles": [
+    {"id": "WORKDAYS","iso_weekdays": [1,2,3,4,5],"windows": [["08:00","12:00"],["13:00","16:00"]]}
+  ],
+  "resources": [
+    {"id": "T1","name": "Teknisi Adi","type": "technician","tags": ["diagnostic"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS","max_daily_minutes": 240},
+    {"id": "T2","name": "Teknisi Bima","type": "technician","tags": ["diagnostic","oil"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS","max_daily_minutes": 240},
+    {"id": "T3","name": "Teknisi Candra","type": "technician","tags": ["oil","brake"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS","max_daily_minutes": 240},
+    {"id": "BA","name": "Bay Umum","type": "service_bay","tags": ["general"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "BB","name": "Bay Lift","type": "service_bay","tags": ["general","lift"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "SCAN","name": "Pool Scanner","type": "equipment_pool","tags": ["obd"],"concurrent_capacity": 2,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "V1","name": "Mobil Armada 01","type": "vehicle","tags": ["passenger_car"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "V2","name": "Mobil Armada 02","type": "vehicle","tags": ["passenger_car"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "V3","name": "Mobil Armada 03","type": "vehicle","tags": ["passenger_car"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "V4","name": "Mobil Armada 04","type": "vehicle","tags": ["passenger_car"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "V5","name": "Mobil Armada 05","type": "vehicle","tags": ["passenger_car"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS"},
+    {"id": "V6","name": "Mobil Armada 06","type": "vehicle","tags": ["passenger_car"],"concurrent_capacity": 1,"active": true,"availability_profile_id": "WORKDAYS"}
+  ],
+  "availability_overrides": [
+    {"resource_id": "T1","date": "2026-09-22","available_windows": [["08:00","12:00"]],"reason": "Tidak tersedia sore"},
+    {"resource_id": "BB","date": "2026-09-22","available_windows": [["10:00","12:00"],["13:00","16:00"]],"reason": "Pemeliharaan lift 08:00–10:00"}
+  ],
+  "activities": [
+    {"id": "A01","name": "Diagnostik Armada 01","active": true,"duration_minutes": 90,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [1,3],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "technician","type": "technician","required_tags": ["diagnostic"],"candidate_ids": ["T1","T2"],"select_count": 1,"units_per_selected_resource": 1},{"role": "vehicle","type": "vehicle","fixed_resource_id": "V1","select_count": 1,"units_per_selected_resource": 1},{"role": "service_bay","type": "service_bay","required_tags": ["general"],"candidate_ids": ["BA","BB"],"select_count": 1,"units_per_selected_resource": 1},{"role": "equipment_pool","type": "equipment_pool","required_tags": ["obd"],"candidate_ids": ["SCAN"],"select_count": 1,"units_per_selected_resource": 1}]},
+    {"id": "A02","name": "Diagnostik Armada 02","active": true,"duration_minutes": 90,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [1,3],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "technician","type": "technician","required_tags": ["diagnostic"],"candidate_ids": ["T1","T2"],"select_count": 1,"units_per_selected_resource": 1},{"role": "vehicle","type": "vehicle","fixed_resource_id": "V2","select_count": 1,"units_per_selected_resource": 1},{"role": "service_bay","type": "service_bay","required_tags": ["general"],"candidate_ids": ["BA","BB"],"select_count": 1,"units_per_selected_resource": 1},{"role": "equipment_pool","type": "equipment_pool","required_tags": ["obd"],"candidate_ids": ["SCAN"],"select_count": 1,"units_per_selected_resource": 1}]},
+    {"id": "A03","name": "Ganti Oli Armada 03","active": true,"duration_minutes": 120,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [1],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "technician","type": "technician","required_tags": ["oil"],"candidate_ids": ["T2","T3"],"select_count": 1,"units_per_selected_resource": 1},{"role": "vehicle","type": "vehicle","fixed_resource_id": "V3","select_count": 1,"units_per_selected_resource": 1},{"role": "service_bay","type": "service_bay","required_tags": ["general","lift"],"candidate_ids": ["BB"],"select_count": 1,"units_per_selected_resource": 1}]},
+    {"id": "A04","name": "Periksa Rem Armada 04","active": true,"duration_minutes": 90,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [1],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "technician","type": "technician","required_tags": ["brake"],"candidate_ids": ["T3"],"select_count": 1,"units_per_selected_resource": 1},{"role": "vehicle","type": "vehicle","fixed_resource_id": "V4","select_count": 1,"units_per_selected_resource": 1},{"role": "service_bay","type": "service_bay","required_tags": ["general","lift"],"candidate_ids": ["BB"],"select_count": 1,"units_per_selected_resource": 1}]},
+    {"id": "A05","name": "Ganti Oli Armada 05","active": true,"duration_minutes": 120,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [2],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "technician","type": "technician","required_tags": ["oil"],"candidate_ids": ["T2","T3"],"select_count": 1,"units_per_selected_resource": 1},{"role": "vehicle","type": "vehicle","fixed_resource_id": "V5","select_count": 1,"units_per_selected_resource": 1},{"role": "service_bay","type": "service_bay","required_tags": ["general","lift"],"candidate_ids": ["BB"],"select_count": 1,"units_per_selected_resource": 1}]},
+    {"id": "A06","name": "Periksa Rem Armada 06","active": true,"duration_minutes": 90,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [2],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "technician","type": "technician","required_tags": ["brake"],"candidate_ids": ["T3"],"select_count": 1,"units_per_selected_resource": 1},{"role": "vehicle","type": "vehicle","fixed_resource_id": "V6","select_count": 1,"units_per_selected_resource": 1},{"role": "service_bay","type": "service_bay","required_tags": ["general","lift"],"candidate_ids": ["BB"],"select_count": 1,"units_per_selected_resource": 1}]},
+    {"id": "A07","name": "Diagnostik Armada 03","active": true,"duration_minutes": 90,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [2],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "technician","type": "technician","required_tags": ["diagnostic"],"candidate_ids": ["T1","T2"],"select_count": 1,"units_per_selected_resource": 1},{"role": "vehicle","type": "vehicle","fixed_resource_id": "V3","select_count": 1,"units_per_selected_resource": 1},{"role": "service_bay","type": "service_bay","required_tags": ["general"],"candidate_ids": ["BA","BB"],"select_count": 1,"units_per_selected_resource": 1},{"role": "equipment_pool","type": "equipment_pool","required_tags": ["obd"],"candidate_ids": ["SCAN"],"select_count": 1,"units_per_selected_resource": 1}]},
+    {"id": "A08","name": "Diagnostik Armada 04","active": true,"duration_minutes": 90,"allowed_windows": [["08:00","12:00"],["13:00","16:00"]],"recurrence": {"frequency": "weekly","iso_weekdays": [2],"start_date": "2026-09-21","until_date": "2026-09-23","excluded_dates": []},"requirements": [{"role": "technician","type": "technician","required_tags": ["diagnostic"],"candidate_ids": ["T1","T2"],"select_count": 1,"units_per_selected_resource": 1},{"role": "vehicle","type": "vehicle","fixed_resource_id": "V4","select_count": 1,"units_per_selected_resource": 1},{"role": "service_bay","type": "service_bay","required_tags": ["general"],"candidate_ids": ["BA","BB"],"select_count": 1,"units_per_selected_resource": 1},{"role": "equipment_pool","type": "equipment_pool","required_tags": ["obd"],"candidate_ids": ["SCAN"],"select_count": 1,"units_per_selected_resource": 1}]}
+  ],
+  "occurrences": [
+    {"id": "O01","activity_id": "A01","date": "2026-09-21","required": true},
+    {"id": "O02","activity_id": "A02","date": "2026-09-21","required": true},
+    {"id": "O03","activity_id": "A03","date": "2026-09-21","required": true},
+    {"id": "O04","activity_id": "A04","date": "2026-09-21","required": true},
+    {"id": "O05","activity_id": "A05","date": "2026-09-22","required": true},
+    {"id": "O06","activity_id": "A06","date": "2026-09-22","required": true},
+    {"id": "O07","activity_id": "A07","date": "2026-09-22","required": true},
+    {"id": "O08","activity_id": "A08","date": "2026-09-22","required": true},
+    {"id": "O09","activity_id": "A01","date": "2026-09-23","required": true},
+    {"id": "O10","activity_id": "A02","date": "2026-09-23","required": true}
+  ],
+  "enabled_hard_rules": ["H01","H02","H03","H04","H05","H06","H07","H08","H09"],
+  "locks": [
+    {"occurrence_id": "O01","date": "2026-09-21","start": "08:00","end": "09:30","resources": {"technician": "T1","vehicle": "V1","service_bay": "BA","equipment_pool": "SCAN"}}
+  ],
+  "published_bookings": [
+    {"id": "B01","workspace_id": "WS-WORKSHOP","schedule_version_id": "EXT-BAY-V1","date": "2026-09-22","start": "13:00","end": "14:30","resource_units": {"BA": 1},"label": "Penggunaan bay oleh kegiatan lain"},
+    {"id": "B02","workspace_id": "WS-WORKSHOP","schedule_version_id": "EXT-SCAN-V1","date": "2026-09-23","start": "08:00","end": "10:00","resource_units": {"SCAN": 1},"label": "Peminjaman satu scanner"}
+  ],
+  "replaces_schedule_version_id": null,
+  "preferences": [
+    {"id": "P01","type": "preferred_time","activity_ids": ["A01","A02","A07","A08"],"weight": 5,"window": ["08:00","12:00"],"match": "full_interval","active": true},
+    {"id": "P02","type": "preferred_resource","activity_ids": ["A01","A02","A07","A08"],"weight": 3,"role": "technician","resource_ids": ["T1"],"active": true},
+    {"id": "P03","type": "preferred_resource","activity_ids": ["A03","A05"],"weight": 1,"role": "technician","resource_ids": ["T2"],"active": true},
+    {"id": "P04","type": "preferred_time","activity_ids": ["A04","A06"],"weight": 1,"window": ["08:00","12:00"],"match": "full_interval","active": true}
+  ],
+  "solver_budget_seconds": 60
+}
