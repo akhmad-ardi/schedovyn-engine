@@ -511,35 +511,49 @@ class PilotSolver:
         if lock is None:
             return True
 
-        lock_start = parse_time(lock["start"])
-        lock_end = parse_time(lock["end"])
-        locked_start_slot = absolute_slot(
-            self.period_start,
-            parse_date(lock["date"]),
-            lock_start,
-            self.slot_minutes,
-        )
-        locked_end_slot = absolute_slot(
-            self.period_start,
-            parse_date(lock["date"]),
-            lock_end,
-            self.slot_minutes,
-        )
-        if (option.start_slot, option.end_slot) != (
-            locked_start_slot,
-            locked_end_slot,
-        ):
+        locked_resources = lock.get("resources", {})
+
+        if set(locked_resources) != set(option.resources_by_role):
             return False
 
-        for role, locked_resource in lock.get("resources", {}).items():
-            actual = option.resources_by_role.get(role, ())
-            expected = (
-                tuple(locked_resource)
-                if isinstance(locked_resource, list)
-                else (locked_resource,)
+        for role, locked_value in locked_resources.items():
+            entries = (
+                locked_value
+                if isinstance(locked_value, list)
+                else [locked_value]
             )
-            if actual != expected:
+
+            expected_ids = []
+            expected_units = {}
+
+            for entry in entries:
+                if isinstance(entry, str):
+                    resource_id = entry
+                elif isinstance(entry, dict):
+                    resource_id = entry["resource_id"]
+                    expected_units[resource_id] = entry["units"]
+                else:
+                    raise SnapshotError(
+                        f"Invalid lock resource format for role {role}"
+                    )
+
+                expected_ids.append(resource_id)
+
+            if len(expected_ids) != len(set(expected_ids)):
+                raise SnapshotError(
+                    f"Duplicate resource in lock role {role}"
+                )
+
+            actual_ids = option.resources_by_role[role]
+
+            # Urutan orang dalam satu role tidak memengaruhi kesamaan lock.
+            if set(actual_ids) != set(expected_ids):
                 return False
+
+            for resource_id, units in expected_units.items():
+                if option.resource_units.get(resource_id) != units:
+                    return False
+
         return True
 
     def _add_hard_rules(self) -> None:

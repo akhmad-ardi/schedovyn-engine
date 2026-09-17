@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from .schedovyn_solver import parse_args, PilotSolver
+from .schedovyn_solver_prototype import parse_args, PilotSolver
 
 def main() -> None:
     args = parse_args()
